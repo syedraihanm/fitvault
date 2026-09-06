@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { progressAPI } from '@/lib/api';
+import { Icon } from '@/components/ui/Icon';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 export default function Progress() {
@@ -86,7 +87,7 @@ export default function Progress() {
       <div className="grid-3">
         {prs.length === 0 ? (
           <div className="empty-state card" style={{ gridColumn: '1 / -1' }}>
-            <div className="empty-icon">🏆</div>
+            <div className="empty-icon"><Icon name="trophy" size={32} /></div>
             <h3>No Records Yet</h3>
             <p>Complete workouts to automatically track your PRs here.</p>
           </div>
@@ -117,7 +118,7 @@ export default function Progress() {
           <div className="modal" style={{ maxWidth: 400 }}>
             <div className="modal-header">
               <h2 className="modal-title">Log Body Weight</h2>
-              <button className="modal-close" onClick={() => setShowModal(false)}>✕</button>
+              <button className="modal-close" aria-label="Close dialog" onClick={() => setShowModal(false)}><Icon name="close" size={18} /></button>
             </div>
             <form onSubmit={handleLogWeight}>
               <div className="form-group">

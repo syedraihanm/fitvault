@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import Sidebar from '@/components/Sidebar';
 import { useState, useEffect } from 'react';
 import { Logo } from '@/components/ui/Logo';
+import { Icon } from '@/components/ui/Icon';
 
 export default function AppLayout({ children }) {
   const { user, loading } = useAuth();
@@ -35,7 +36,9 @@ export default function AppLayout({ children }) {
         <div className="sidebar-logo" style={{ marginBottom: 0, padding: 0 }}>
           <Logo size="sm" />
         </div>
-        <button className="hamburger" onClick={() => setSidebarOpen(true)}>☰</button>
+        <button className="hamburger" onClick={() => setSidebarOpen(true)} aria-label="Open navigation">
+          <Icon name="menu" />
+        </button>
       </div>
 
       {/* Sidebar Overlay */}

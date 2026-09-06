@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { workoutAPI, exerciseAPI } from '@/lib/api';
+import { Icon } from '@/components/ui/Icon';
 import { useAuth } from '@/lib/auth';
 import { Button } from '@/components/ui/Button';
 import { Skeleton } from '@/components/ui/Skeleton';
@@ -200,7 +201,7 @@ export default function Workouts() {
           <div className="modal" style={{ maxWidth: 800 }}>
             <div className="modal-header">
               <h2 className="modal-title">Log Workout</h2>
-              <button className="modal-close" onClick={() => setShowModal(false)}>✕</button>
+              <button className="modal-close" aria-label="Close dialog" onClick={() => setShowModal(false)}><Icon name="close" size={18} /></button>
             </div>
 
             <div className="form-group">
@@ -226,7 +227,7 @@ export default function Workouts() {
               <div key={idx} className="card" style={{ marginBottom: 16, padding: 16, background: 'var(--bg-secondary)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
                   <h3 style={{ fontSize: 16, color: 'var(--accent-primary)' }}>{ae.exerciseName}</h3>
-                  <button className="btn-icon" onClick={() => removeExercise(idx)} style={{ color: 'var(--text-muted)' }}>✕</button>
+                  <button className="btn-icon" aria-label={`Remove ${ae.exerciseName}`} onClick={() => removeExercise(idx)} style={{ color: 'var(--text-muted)' }}><Icon name="close" size={16} /></button>
                 </div>
                 
                 <table style={{ width: '100%', marginBottom: 16 }}>
@@ -251,7 +252,7 @@ export default function Workouts() {
                             value={set.reps} onChange={e => updateSet(idx, sIdx, 'reps', e.target.value)} />
                         </td>
                         <td style={{ padding: '4px', textAlign: 'center' }}>
-                          <Button variant="ghost" size="icon" onClick={() => removeSet(idx, sIdx)} className="text-[var(--text-muted)] hover:text-[var(--accent-secondary)]">✕</Button>
+                          <Button variant="ghost" size="icon" aria-label={`Remove set ${sIdx + 1}`} onClick={() => removeSet(idx, sIdx)} className="text-[var(--text-muted)] hover:text-[var(--accent-secondary)]"><Icon name="close" size={16} /></Button>
                         </td>
                       </tr>
                     ))}

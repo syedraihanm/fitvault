@@ -6,6 +6,7 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { Button } from '@/components/ui/Button';
+import { Icon } from '@/components/ui/Icon';
 
 const DashboardCharts = dynamic(() => import('@/components/features/analytics/DashboardCharts'), {
   ssr: false,
@@ -77,14 +78,14 @@ export default function Dashboard() {
   return (
     <div className="fade-in">
       <div className="page-header">
-        <h1>Welcome back, {user?.name?.split(' ')[0]} 👋</h1>
+        <h1>Welcome back, {user?.name?.split(' ')[0]}</h1>
         <p>Here&apos;s your daily fitness summary.</p>
       </div>
 
       {/* Quick Stats Grid */}
       <div className="stat-grid">
         <div className="stat-card fire">
-          <div className="stat-icon">🔥</div>
+          <div className="stat-icon"><Icon name="flame" /></div>
           <div className="stat-label">Calories Eaten</div>
           <div className="stat-value">{nutrition.calories.toLocaleString()} <span style={{ fontSize: 14 }}>/ {nutrition.calorieTarget}</span></div>
           <div className="progress-bar">
@@ -98,7 +99,7 @@ export default function Dashboard() {
         </div>
 
         <div className="stat-card purple">
-          <div className="stat-icon">💪</div>
+          <div className="stat-icon"><Icon name="dumbbell" /></div>
           <div className="stat-label">Today&apos;s Workout</div>
           {workout ? (
             <>
@@ -119,7 +120,7 @@ export default function Dashboard() {
 
         <div className="stat-card cyan">
           <div className="stat-icon" style={{ display: 'flex', justifyContent: 'space-between' }}>
-            💧 
+            <Icon name="water" />
             <Button variant="ghost" size="icon" className="hover:bg-[rgba(0,240,255,0.1)] text-[var(--accent-cyan)]" onClick={handleLogWater}>+</Button>
           </div>
           <div className="stat-label">Water Intake</div>
@@ -131,7 +132,7 @@ export default function Dashboard() {
         </div>
 
         <div className="stat-card green">
-          <div className="stat-icon">👣</div>
+          <div className="stat-icon"><Icon name="footsteps" /></div>
           <div className="stat-label">Daily Steps</div>
           <div className="stat-value">{steps.count.toLocaleString()} <span style={{ fontSize: 14 }}>/ {(steps.target || 10000).toLocaleString()}</span></div>
           <div className="progress-bar">

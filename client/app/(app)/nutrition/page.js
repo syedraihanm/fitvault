@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { nutritionAPI } from '@/lib/api';
+import { Icon } from '@/components/ui/Icon';
 import { useAuth } from '@/lib/auth';
 
 export default function Nutrition() {
@@ -146,7 +147,7 @@ export default function Nutrition() {
                           </div>
                         ))}
                       </div>
-                      <button className="btn-icon" style={{ color: 'var(--accent-secondary)' }} onClick={() => deleteMeal(meal._id)}>✕</button>
+                      <button className="btn-icon" aria-label="Delete meal" style={{ color: 'var(--accent-secondary)' }} onClick={() => deleteMeal(meal._id)}><Icon name="close" size={16} /></button>
                     </div>
                   ))
                 )}
@@ -162,7 +163,7 @@ export default function Nutrition() {
           <div className="modal">
             <div className="modal-header">
               <h2 className="modal-title">Add to {selectedMealType}</h2>
-              <button className="modal-close" onClick={() => setShowModal(false)}>✕</button>
+              <button className="modal-close" aria-label="Close dialog" onClick={() => setShowModal(false)}><Icon name="close" size={18} /></button>
             </div>
 
             <input 

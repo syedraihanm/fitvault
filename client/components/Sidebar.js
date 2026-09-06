@@ -3,22 +3,23 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/lib/auth';
 import { Logo } from '@/components/ui/Logo';
+import { Icon } from '@/components/ui/Icon';
 
 export default function Sidebar({ isOpen, onClose, isAdmin }) {
   const pathname = usePathname();
   const { logout, user } = useAuth();
 
   const navItems = [
-    { name: 'Dashboard', path: '/dashboard', icon: '📊' },
-    { name: 'Workouts', path: '/workouts', icon: '💪' },
-    { name: 'Programs', path: '/programs', icon: '📋' },
-    { name: 'Nutrition', path: '/nutrition', icon: '🥗' },
-    { name: 'Progress', path: '/progress', icon: '📈' },
-    { name: 'AI Coach', path: '/coach', icon: '🤖' },
+    { name: 'Dashboard', path: '/dashboard', icon: 'chart' },
+    { name: 'Workouts', path: '/workouts', icon: 'dumbbell' },
+    { name: 'Programs', path: '/programs', icon: 'list' },
+    { name: 'Nutrition', path: '/nutrition', icon: 'nutrition' },
+    { name: 'Progress', path: '/progress', icon: 'trend' },
+    { name: 'AI Coach', path: '/coach', icon: 'bot' },
   ];
 
   if (isAdmin) {
-    navItems.push({ name: 'Admin Panel', path: '/admin', icon: '⚙️' });
+    navItems.push({ name: 'Admin Panel', path: '/admin', icon: 'settings' });
   }
 
   return (
@@ -28,7 +29,9 @@ export default function Sidebar({ isOpen, onClose, isAdmin }) {
           <Logo size="md" />
         </div>
         {isOpen && (
-          <button className="hamburger" onClick={onClose} style={{ marginBottom: 32 }}>✕</button>
+          <button className="hamburger" onClick={onClose} style={{ marginBottom: 32 }} aria-label="Close navigation">
+            <Icon name="close" />
+          </button>
         )}
       </div>
 
@@ -40,7 +43,7 @@ export default function Sidebar({ isOpen, onClose, isAdmin }) {
             onClick={() => isOpen && onClose()}
             className={`nav-item ${pathname.includes(item.path) ? 'active' : ''}`}
           >
-            <span className="nav-icon">{item.icon}</span>
+            <span className="nav-icon"><Icon name={item.icon} /></span>
             {item.name}
           </Link>
         ))}
@@ -53,14 +56,14 @@ export default function Sidebar({ isOpen, onClose, isAdmin }) {
           className={`nav-item ${pathname.includes('/profile') ? 'active' : ''}`}
           style={{ marginBottom: 8 }}
         >
-          <span className="nav-icon">👤</span>
+          <span className="nav-icon"><Icon name="user" /></span>
           <div style={{ display: 'flex', flexDirection: 'column', flex: 1, overflow: 'hidden' }}>
             <span style={{ fontSize: 13, fontWeight: 600, whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>{user?.name}</span>
             <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>Settings</span>
           </div>
         </Link>
         <button onClick={logout} className="nav-item" style={{ color: 'var(--accent-secondary)' }}>
-          <span className="nav-icon">🚪</span>
+          <span className="nav-icon"><Icon name="logout" /></span>
           Sign Out
         </button>
       </div>
