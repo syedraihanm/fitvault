@@ -162,34 +162,4 @@ The server exposes these route groups under `/api`:
 
 All application routes use authentication. Admin endpoints additionally require an account with the `admin` role.
 
-## Troubleshooting
 
-### MongoDB authentication failed
-
-Check the Atlas database username and password, confirm the database user has the required permissions, and allow your current IP address in Atlas Network Access. This is separate from an Atlas API key.
-
-### Frontend cannot reach the API
-
-Confirm that the server is running on port `5000` and that `client/.env.local` contains:
-
-```env
-NEXT_PUBLIC_API_URL=http://localhost:5000/api
-```
-
-If port `5000` is already in use, stop the other server or update both the server port and client API URL to match.
-
-### Admin login is rejected
-
-The seed script does not overwrite an existing admin password. Use the current password for that account or reset it through an administrative database operation.
-
-### Port already in use
-
-Only start one server process per port. A second `npm run dev` will fail with `EADDRINUSE` while the original process is still running.
-
-## Security Notes
-
-- Never commit `.env`, `.env.local`, database passwords, or JWT secrets.
-- Replace the development JWT secret before deployment.
-- Replace the default admin password before sharing or deploying the application.
-- Use a restricted Atlas database user instead of an owner-level account.
-- Configure production CORS, HTTPS, upload storage, and secret management before deployment.
